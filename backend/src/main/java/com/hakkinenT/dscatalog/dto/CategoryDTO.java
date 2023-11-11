@@ -1,4 +1,4 @@
-package com.hakkinenT.dscatalog;
+package com.hakkinenT.dscatalog.dto;
 
 import com.hakkinenT.dscatalog.entities.Category;
 
