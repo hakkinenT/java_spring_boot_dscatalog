@@ -21,4 +21,6 @@ public class CategoryController {
         Page<CategoryDTO> categories = categoryService.findAll(pageable);
         return ResponseEntity.ok(categories);
     }
+
+
 }
