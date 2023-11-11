@@ -25,4 +25,12 @@ public class CategoryService {
                 .orElseThrow(() -> new ResourceNotFoundException("Recurso não encontrado!"));
         return new CategoryDTO(category);
     }
+
+    public CategoryDTO insert(CategoryDTO dto){
+        Category category = new Category();
+        category.setName(dto.getName());
+
+        category = categoryRepository.save(category);
+        return new CategoryDTO(category);
+    }
 }
