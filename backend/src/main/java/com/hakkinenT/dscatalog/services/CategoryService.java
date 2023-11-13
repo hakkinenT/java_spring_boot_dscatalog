@@ -17,17 +17,20 @@ public class CategoryService {
     @Autowired
     private CategoryRepository categoryRepository;
 
+    @Transactional(readOnly = true)
     public Page<CategoryDTO> findAll(Pageable pageable){
         Page<Category> categories = categoryRepository.findAll(pageable);
         return categories.map(cat -> new CategoryDTO(cat));
     }
 
+    @Transactional(readOnly = true)
     public CategoryDTO findById(Long id){
         Category category = categoryRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Recurso não encontrado!"));
         return new CategoryDTO(category);
     }
-    
+
+    @Transactional
     public CategoryDTO insert(CategoryDTO dto){
         Category category = new Category();
         category.setName(dto.getName());
