@@ -82,5 +82,5 @@ public class ProductDTO {
         return categories;
     }
 
-   
+
 }
