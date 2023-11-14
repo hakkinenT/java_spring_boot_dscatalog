@@ -3,7 +3,9 @@ package com.hakkinenT.dscatalog.entities;
 import jakarta.persistence.*;
 
 import java.time.Instant;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
 @Table(name = "tb_product")
@@ -23,6 +25,12 @@ public class Product {
 
     @Column(columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
     private Instant updatedAt;
+
+    @ManyToMany
+    @JoinTable(name = "tb_product_category",
+            joinColumns = @JoinColumn(name = "product_id"),
+            inverseJoinColumns = @JoinColumn(name = "category_id"))
+    private Set<Category> categories = new HashSet<>();
 
 
     public Product() {
@@ -74,6 +82,10 @@ public class Product {
 
     public void setImgUrl(String imgUrl) {
         this.imgUrl = imgUrl;
+    }
+
+    public Set<Category> getCategories() {
+        return categories;
     }
 
     public Instant getCreatedAt() {
