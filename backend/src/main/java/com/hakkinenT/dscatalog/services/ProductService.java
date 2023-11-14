@@ -1,7 +1,10 @@
 package com.hakkinenT.dscatalog.services;
 
+import com.hakkinenT.dscatalog.dto.CategoryDTO;
 import com.hakkinenT.dscatalog.dto.ProductDTO;
+import com.hakkinenT.dscatalog.entities.Category;
 import com.hakkinenT.dscatalog.entities.Product;
+import com.hakkinenT.dscatalog.repositories.CategoryRepository;
 import com.hakkinenT.dscatalog.repositories.ProductRepository;
 import com.hakkinenT.dscatalog.services.exceptions.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +18,9 @@ public class ProductService {
     @Autowired
     private ProductRepository productRepository;
 
+    @Autowired
+    private CategoryRepository categoryRepository;
+
     @Transactional(readOnly = true)
     public Page<ProductDTO> findAll(Pageable pageable){
         Page<Product> products = productRepository.findAll(pageable);
@@ -25,6 +31,28 @@ public class ProductService {
     public ProductDTO findById(Long id){
         Product product = productRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Recurso não encontrado!"));
         return new ProductDTO(product);
+    }
+
+    @Transactional
+    public ProductDTO insert(ProductDTO dto){
+        Product product = new Product();
+        copyDtoToEntity(dto, product);
+        product = productRepository.save(product);
+        return new ProductDTO(product);
+    }
+
+    private void copyDtoToEntity(ProductDTO dto, Product entity){
+        entity.setName(dto.getName());
+        entity.setDescription(dto.getDescription());
+        entity.setPrice(dto.getPrice());
+        entity.setImgUrl(dto.getImgUrl());
+
+        entity.getCategories().clear();
+        for(CategoryDTO categoryDTO : dto.getCategories()){
+            Category category = categoryRepository.getReferenceById(categoryDTO.getId());
+            entity.getCategories().add(category);
+        }
+
     }
 
 
