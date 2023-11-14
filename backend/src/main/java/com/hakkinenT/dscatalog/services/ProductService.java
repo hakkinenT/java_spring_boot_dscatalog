@@ -7,6 +7,7 @@ import com.hakkinenT.dscatalog.entities.Product;
 import com.hakkinenT.dscatalog.repositories.CategoryRepository;
 import com.hakkinenT.dscatalog.repositories.ProductRepository;
 import com.hakkinenT.dscatalog.services.exceptions.ResourceNotFoundException;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -39,6 +40,18 @@ public class ProductService {
         copyDtoToEntity(dto, product);
         product = productRepository.save(product);
         return new ProductDTO(product);
+    }
+
+    @Transactional
+    public ProductDTO update(Long id, ProductDTO dto){
+        try{
+            Product product = productRepository.getReferenceById(id);
+            copyDtoToEntity(dto, product);
+            product = productRepository.save(product);
+            return new ProductDTO(product);
+        }catch (EntityNotFoundException e){
+            throw new ResourceNotFoundException("Id not found " + id);
+        }
     }
 
     private void copyDtoToEntity(ProductDTO dto, Product entity){
