@@ -20,13 +20,13 @@ public class CategoryController {
     @GetMapping
     public ResponseEntity<Page<CategoryDTO>> findAll(Pageable pageable){
         Page<CategoryDTO> categories = categoryService.findAll(pageable);
-        return ResponseEntity.ok(categories);
+        return ResponseEntity.ok().body(categories);
     }
 
     @GetMapping(value = "/{id}")
     public ResponseEntity<CategoryDTO> findById(@PathVariable Long id){
         CategoryDTO categoryDTO = categoryService.findById(id);
-        return ResponseEntity.ok(categoryDTO);
+        return ResponseEntity.ok().body(categoryDTO);
     }
 
     @PostMapping
