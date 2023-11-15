@@ -20,13 +20,13 @@ public class ProductController {
     @GetMapping
     public ResponseEntity<Page<ProductDTO>> findAll(Pageable pageable){
         Page<ProductDTO> products = productService.findAll(pageable);
-        return ResponseEntity.ok(products);
+        return ResponseEntity.ok().body(products);
     }
 
     @GetMapping(value = "/{id}")
     public ResponseEntity<ProductDTO> findById(@PathVariable Long id){
         ProductDTO product = productService.findById(id);
-        return ResponseEntity.ok(product);
+        return ResponseEntity.ok().body(product);
     }
 
     @PostMapping
@@ -39,7 +39,7 @@ public class ProductController {
     @PutMapping(value = "/{id}")
     public ResponseEntity<ProductDTO> update(@PathVariable Long id, @RequestBody ProductDTO dto){
         ProductDTO product = productService.update(id, dto);
-        return ResponseEntity.ok(product);
+        return ResponseEntity.ok().body(product);
     }
 
     @DeleteMapping(value = "/{id}")
