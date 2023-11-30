@@ -52,7 +52,7 @@ public class ProductServiceTests {
 
     private Category category;
 
-    private long categoryId;
+
 
 
     @BeforeEach
@@ -62,10 +62,10 @@ public class ProductServiceTests {
         dependentId = 3L;
         product = Factory.createProduct();
         page = new PageImpl<>(List.of(product));
-        productDTO = Factory.createProductDTOToInsert();
+        productDTO = Factory.createProductDTO();
 
-        category = new Category(2L, "Electronics");
-        categoryId = 2L;
+        category = Factory.createCategory();
+
 
 
         when(productRepository.existsById(existingId)).thenReturn(true);
@@ -83,7 +83,11 @@ public class ProductServiceTests {
         when(productRepository.findById(existingId)).thenReturn(Optional.of(product));
         when(productRepository.findById(nonExistingId)).thenReturn(Optional.empty());
 
-        when(categoryRepository.getReferenceById(categoryId)).thenReturn(category);
+        when(productRepository.getReferenceById(existingId)).thenReturn(product);
+        when(productRepository.getReferenceById(nonExistingId)).thenThrow(ResourceNotFoundException.class);
+
+        when(categoryRepository.getReferenceById(existingId)).thenReturn(category);
+        when(categoryRepository.getReferenceById(nonExistingId)).thenThrow(ResourceNotFoundException.class);
     }
 
     @Test
@@ -96,10 +100,41 @@ public class ProductServiceTests {
     }
 
     @Test
+    public void findByIdShouldReturnProductDTOWhenIdExists(){
+        ProductDTO result = service.findById(existingId);
+        Assertions.assertNotNull(result);
+        verify(productRepository, times(1)).findById(existingId);
+    }
+
+    @Test
+    public void findByIdShouldThrowResourceNotFoundExceptionWhenIdDoesNotExist(){
+        Assertions.assertThrows(ResourceNotFoundException.class, () -> {
+            service.findById(nonExistingId);
+        });
+    }
+
+    @Test
     public void insertShouldReturnProductDTO(){
-        ProductDTO result = service.insert(productDTO);
+        ProductDTO pDto = Factory.createProductDTO();
+        pDto.setId(null);
+        ProductDTO result = service.insert(pDto);
         Assertions.assertNotNull(result);
 
+    }
+
+
+    @Test
+    public void updateShouldReturnProductDTOWhenIdExists(){
+        ProductDTO result = service.update(existingId, productDTO);
+        Assertions.assertNotNull(result);
+        verify(productRepository, times(1)).save(product);
+    }
+
+    @Test
+    public void updateShouldThrowResourceNotFoundExceptionWhenIdDoesNotExist(){
+        Assertions.assertThrows(ResourceNotFoundException.class, () -> {
+            service.update(nonExistingId, productDTO);
+        });
     }
 
     @Test
