@@ -27,16 +27,13 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@WebMvcTest
+@WebMvcTest(ProductController.class)
 public class ProductControllerTests {
     @Autowired
     private MockMvc mockMvc;
 
     @MockBean
     private ProductService service;
-
-    @MockBean
-    private CategoryService categoryService;
 
     @Autowired
     private ObjectMapper mapper;
