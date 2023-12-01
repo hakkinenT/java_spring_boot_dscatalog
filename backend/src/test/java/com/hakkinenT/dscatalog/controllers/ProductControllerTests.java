@@ -61,6 +61,8 @@ public class ProductControllerTests {
         when(service.update(eq(existingId), any())).thenReturn(productDTO);
         when(service.update(eq(nonExistingId), any())).thenThrow(ResourceNotFoundException.class);
 
+        when(service.insert(any())).thenReturn(productDTO);
+
         doNothing().when(service).delete(existingId);
         doThrow(ResourceNotFoundException.class).when(service).delete(nonExistingId);
         doThrow(DatabaseException.class).when(service).delete(dependentId);
