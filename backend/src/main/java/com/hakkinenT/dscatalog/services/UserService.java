@@ -1,9 +1,6 @@
 package com.hakkinenT.dscatalog.services;
 
-import com.hakkinenT.dscatalog.dto.CategoryDTO;
-import com.hakkinenT.dscatalog.dto.RoleDTO;
-import com.hakkinenT.dscatalog.dto.UserDTO;
-import com.hakkinenT.dscatalog.dto.UserInsertDTO;
+import com.hakkinenT.dscatalog.dto.*;
 import com.hakkinenT.dscatalog.entities.Category;
 import com.hakkinenT.dscatalog.entities.Role;
 import com.hakkinenT.dscatalog.entities.User;
@@ -55,7 +52,7 @@ public class UserService {
     }
 
     @Transactional
-    public UserDTO update(Long id, UserDTO dto){
+    public UserDTO update(Long id, UserUpdateDTO dto){
         try{
             User user = userRepository.getReferenceById(id);
             copyDtoToEntity(dto, user);

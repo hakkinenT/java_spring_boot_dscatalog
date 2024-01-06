@@ -3,6 +3,7 @@ package com.hakkinenT.dscatalog.controllers;
 import com.hakkinenT.dscatalog.dto.ProductDTO;
 import com.hakkinenT.dscatalog.dto.UserDTO;
 import com.hakkinenT.dscatalog.dto.UserInsertDTO;
+import com.hakkinenT.dscatalog.dto.UserUpdateDTO;
 import com.hakkinenT.dscatalog.services.ProductService;
 import com.hakkinenT.dscatalog.services.UserService;
 import jakarta.validation.Valid;
@@ -41,7 +42,7 @@ public class UserController {
     }
 
     @PutMapping(value = "/{id}")
-    public ResponseEntity<UserDTO> update(@PathVariable Long id, @Valid @RequestBody UserDTO dto){
+    public ResponseEntity<UserDTO> update(@PathVariable Long id, @Valid @RequestBody UserUpdateDTO dto){
         UserDTO user = userService.update(id, dto);
         return ResponseEntity.ok().body(user);
     }
