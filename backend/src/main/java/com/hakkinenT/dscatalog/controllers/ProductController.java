@@ -1,6 +1,7 @@
 package com.hakkinenT.dscatalog.controllers;
 
 import com.hakkinenT.dscatalog.dto.ProductDTO;
+import com.hakkinenT.dscatalog.projections.ProductProjection;
 import com.hakkinenT.dscatalog.services.ProductService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,8 +21,11 @@ public class ProductController {
     private ProductService productService;
 
     @GetMapping
-    public ResponseEntity<Page<ProductDTO>> findAll(Pageable pageable){
-        Page<ProductDTO> products = productService.findAll(pageable);
+    public ResponseEntity<Page<ProductDTO>> findAll(
+           @RequestParam(value = "name", defaultValue = "") String name,
+           @RequestParam(value = "categoryId", defaultValue = "0") String categoryId,
+            Pageable pageable){
+        Page<ProductDTO> products = productService.findAllPaged(name, categoryId, pageable);
         return ResponseEntity.ok().body(products);
     }
 
