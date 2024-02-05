@@ -9,6 +9,7 @@ import com.hakkinenT.dscatalog.repositories.CategoryRepository;
 import com.hakkinenT.dscatalog.repositories.ProductRepository;
 import com.hakkinenT.dscatalog.services.exceptions.DatabaseException;
 import com.hakkinenT.dscatalog.services.exceptions.ResourceNotFoundException;
+import com.hakkinenT.dscatalog.util.Utils;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -88,6 +89,7 @@ public class ProductService {
 
     }
 
+    @SuppressWarnings("unchecked")
     @Transactional(readOnly = true)
     public Page<ProductDTO> findAllPaged(String name, String categoryId, Pageable pageable) {
         List<Long> categoryIds = List.of();
@@ -104,9 +106,10 @@ public class ProductService {
         List<Long> productIds = page.map(ProductProjection::getId).toList();
 
         List<Product> entities = productRepository.searchProductsWithCategories(productIds);
+        entities = (List<Product>) Utils.replace(page.getContent(), entities);
+
         List<ProductDTO> dtos = entities.stream().map(p -> new ProductDTO(p, p.getCategories())).toList();
 
-        Page<ProductDTO> pageDto = new PageImpl<>(dtos, page.getPageable(), page.getTotalElements());
-        return pageDto;
+        return new PageImpl<>(dtos, page.getPageable(), page.getTotalElements());
     }
 }
