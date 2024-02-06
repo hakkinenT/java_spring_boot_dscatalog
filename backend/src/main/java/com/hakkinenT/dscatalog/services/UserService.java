@@ -22,6 +22,7 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class UserService implements UserDetailsService {
@@ -34,10 +35,19 @@ public class UserService implements UserDetailsService {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
+    @Autowired
+    private AuthService authService;
+
     @Transactional(readOnly = true)
     public Page<UserDTO> findAll(Pageable pageable){
         Page<User> users = userRepository.findAll(pageable);
         return users.map(user -> new UserDTO(user));
+    }
+
+    @Transactional(readOnly = true)
+    public UserDTO findByMe(){
+        User user = authService.authenticated();
+        return new UserDTO(user);
     }
 
     @Transactional(readOnly = true)
