@@ -45,6 +45,9 @@ public class AuthService {
     @Autowired
     private EmailService emailService;
 
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
 
     @Transactional
     public void createRecoverToken(EmailDTO body) {
@@ -65,5 +68,18 @@ public class AuthService {
                 + recoverUri + token + ". Validade de " + tokenMinutes + " minutos";
 
         emailService.sendEmail(body.getEmail(), "Recuperação de senha",text);
+    }
+
+    @Transactional
+    public void saveNewPassword(NewPasswordDTO body) {
+        List<PasswordRecover> result = passwordRecoverRepository.searchValidTokens(body.getToken(), Instant.now());
+        if (result.isEmpty()){
+            throw new ResourceNotFoundException("Token inválido.");
+        }
+
+        User user = userRepository.findByEmail(result.get(0).getEmail());
+        user.setPassword(passwordEncoder.encode(body.getPassword()));
+
+        user = userRepository.save(user);
     }
 }
