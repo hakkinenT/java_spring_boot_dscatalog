@@ -3,6 +3,7 @@ package com.hakkinenT.dscatalog.controllers;
 import com.hakkinenT.dscatalog.dto.UserDTO;
 import com.hakkinenT.dscatalog.dto.UserInsertDTO;
 import com.hakkinenT.dscatalog.dto.UserUpdateDTO;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.security.access.prepost.PreAuthorize;
 import com.hakkinenT.dscatalog.services.UserService;
 import jakarta.validation.Valid;
@@ -17,6 +18,7 @@ import java.net.URI;
 
 @RestController
 @RequestMapping(value = "/users")
+@Tag(name = "Users", description = "Controller for User")
 public class UserController {
     @Autowired
     private UserService userService;

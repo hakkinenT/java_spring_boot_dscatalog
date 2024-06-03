@@ -3,6 +3,7 @@ package com.hakkinenT.dscatalog.controllers;
 import com.hakkinenT.dscatalog.dto.ProductDTO;
 import com.hakkinenT.dscatalog.projections.ProductProjection;
 import com.hakkinenT.dscatalog.services.ProductService;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -16,6 +17,7 @@ import java.net.URI;
 
 @RestController
 @RequestMapping(value = "/products")
+@Tag(name = "Products", description = "Controller for Product")
 public class ProductController {
     @Autowired
     private ProductService productService;

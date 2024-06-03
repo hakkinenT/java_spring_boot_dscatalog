@@ -2,6 +2,7 @@ package com.hakkinenT.dscatalog.controllers;
 
 import com.hakkinenT.dscatalog.dto.CategoryDTO;
 import com.hakkinenT.dscatalog.services.CategoryService;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -15,6 +16,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping(value = "/categories")
+@Tag(name = "Categories", description = "Controller for Category")
 public class CategoryController {
     @Autowired
     private CategoryService categoryService;
