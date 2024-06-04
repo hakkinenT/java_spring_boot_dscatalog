@@ -4,6 +4,7 @@ import com.hakkinenT.dscatalog.dto.CategoryDTO;
 import com.hakkinenT.dscatalog.services.CategoryService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -59,6 +60,7 @@ public class CategoryController {
                     @ApiResponse(description = "Forbidden", responseCode = "403"),
             }
     )
+    @SecurityRequirement(name = "bearerAuth")
     @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_OPERATOR')")
     @PostMapping(produces = "application/json")
     public ResponseEntity<CategoryDTO> insert(@RequestBody CategoryDTO dto){
@@ -81,6 +83,7 @@ public class CategoryController {
                     @ApiResponse(description = "Not Found", responseCode = "404")
             }
     )
+    @SecurityRequirement(name = "bearerAuth")
     @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_OPERATOR')")
     @PutMapping(value = "/{id}", produces = "application/json")
     public ResponseEntity<CategoryDTO> update(@PathVariable Long id, @RequestBody CategoryDTO dto){
@@ -100,6 +103,7 @@ public class CategoryController {
                     @ApiResponse(description = "Not Found", responseCode = "404")
             }
     )
+    @SecurityRequirement(name = "bearerAuth")
     @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_OPERATOR')")
     @DeleteMapping(value = "/{id}", produces = "application/json")
     public ResponseEntity<Void> delete(@PathVariable Long id){

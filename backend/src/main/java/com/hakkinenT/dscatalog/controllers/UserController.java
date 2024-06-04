@@ -5,6 +5,7 @@ import com.hakkinenT.dscatalog.dto.UserInsertDTO;
 import com.hakkinenT.dscatalog.dto.UserUpdateDTO;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.security.access.prepost.PreAuthorize;
 import com.hakkinenT.dscatalog.services.UserService;
@@ -34,6 +35,7 @@ public class UserController {
                     @ApiResponse(description = "Forbidden", responseCode = "403")
             }
     )
+    @SecurityRequirement(name = "bearerAuth")
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @GetMapping(produces = "application/json")
     public ResponseEntity<Page<UserDTO>> findAll(Pageable pageable){
@@ -51,6 +53,7 @@ public class UserController {
                     @ApiResponse(description = "Not Found", responseCode = "404")
             }
     )
+    @SecurityRequirement(name = "bearerAuth")
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @GetMapping(value = "/{id}", produces = "application/json")
     public ResponseEntity<UserDTO> findById(@PathVariable Long id){
@@ -67,6 +70,7 @@ public class UserController {
                     @ApiResponse(description = "Forbidden", responseCode = "403")
             }
     )
+    @SecurityRequirement(name = "bearerAuth")
     @PreAuthorize("hasAnyRole('ROLE_OPERATOR','ROLE_ADMIN')")
     @GetMapping(value = "/me", produces = "application/json")
     public ResponseEntity<UserDTO> findByMe(){
@@ -100,6 +104,7 @@ public class UserController {
                     @ApiResponse(description = "Unprocessable Entity", responseCode = "422")
             }
     )
+    @SecurityRequirement(name = "bearerAuth")
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PutMapping(value = "/{id}", produces = "application/json")
     public ResponseEntity<UserDTO> update(@PathVariable Long id, @Valid @RequestBody UserUpdateDTO dto){
@@ -118,6 +123,7 @@ public class UserController {
                     @ApiResponse(description = "Not Found", responseCode = "404")
             }
     )
+    @SecurityRequirement(name = "bearerAuth")
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @DeleteMapping(value = "/{id}", produces = "application/json")
     public ResponseEntity<Void> delete(@PathVariable Long id){

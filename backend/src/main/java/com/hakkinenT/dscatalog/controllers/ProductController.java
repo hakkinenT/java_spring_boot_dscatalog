@@ -5,6 +5,7 @@ import com.hakkinenT.dscatalog.projections.ProductProjection;
 import com.hakkinenT.dscatalog.services.ProductService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -64,6 +65,7 @@ public class ProductController {
                     @ApiResponse(description = "Unprocessable Entity", responseCode = "422")
             }
     )
+    @SecurityRequirement(name = "bearerAuth")
     @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_OPERATOR')")
     @PostMapping(produces = "application/json")
     public ResponseEntity<ProductDTO> insert(@Valid @RequestBody ProductDTO dto){
@@ -83,6 +85,7 @@ public class ProductController {
                     @ApiResponse(description = "Unprocessable Entity", responseCode = "422")
             }
     )
+    @SecurityRequirement(name = "bearerAuth")
     @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_OPERATOR')")
     @PutMapping(value = "/{id}", produces = "application/json")
     public ResponseEntity<ProductDTO> update(@PathVariable Long id, @Valid @RequestBody ProductDTO dto){
@@ -101,6 +104,7 @@ public class ProductController {
                     @ApiResponse(description = "Not Found", responseCode = "404")
             }
     )
+    @SecurityRequirement(name = "bearerAuth")
     @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_OPERATOR')")
     @DeleteMapping(value = "/{id}", produces = "application/json")
     public ResponseEntity<Void> delete(@PathVariable Long id){
