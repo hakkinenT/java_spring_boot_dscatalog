@@ -15,7 +15,7 @@ import org.springframework.context.annotation.Configuration;
 public class OpenApiConfig {
 
     @Bean
-    public OpenAPI dsmovieAPI() {
+    public OpenAPI dscatalogAPI() {
         return new OpenAPI()
                 .info(new Info()
                         .title("DSCatalog API")
