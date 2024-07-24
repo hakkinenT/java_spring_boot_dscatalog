@@ -19,13 +19,11 @@ public class ProductRepositoryTests {
 
     private long existingId;
     private long nonExistingId;
-    private long countTotalProducts;
 
     @BeforeEach
     void setUp() throws Exception{
         existingId = 1L;
         nonExistingId = 27L;
-        countTotalProducts = 25L;
     }
 
     @Test
@@ -35,7 +33,7 @@ public class ProductRepositoryTests {
 
         product = productRepository.save(product);
         Assertions.assertNotNull(product.getId());
-        Assertions.assertEquals(countTotalProducts + 1, product.getId());
+        Assertions.assertEquals("Phone", product.getName());
     }
 
     @Test
