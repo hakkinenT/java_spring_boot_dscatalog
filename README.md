@@ -5,8 +5,6 @@
 ![Java](https://img.shields.io/badge/java-%23ED8B00.svg?style=for-the-badge&logo=openjdk&logoColor=white)
 ![Spring](https://img.shields.io/badge/spring-%236DB33F.svg?style=for-the-badge&logo=spring&logoColor=white)
 
-# DSCatalog 📚
-
 API REST para gerenciamento de um catálogo de produtos, desenvolvida com foco em **boas práticas**, **testes automatizados** e organização de código no ecossistema Spring.
 
 ## 🚀 Funcionalidades
