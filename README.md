@@ -1,156 +1,129 @@
 
-# DSCatalog
+# DSCatalog 📚
 
 [![MIT License](https://img.shields.io/badge/License-MIT-green.svg?style=for-the-badge)](https://github.com/hakkinenT/java_spring_boot_dscatalog/blob/main/LICENSE) 
 ![Java](https://img.shields.io/badge/java-%23ED8B00.svg?style=for-the-badge&logo=openjdk&logoColor=white)
 ![Spring](https://img.shields.io/badge/spring-%236DB33F.svg?style=for-the-badge&logo=spring&logoColor=white)
 
-## Tabela de Conteúdo
-- [Sobre o projeto](#sobre-o-projeto)
-- [Modelo Conceitual](#modelo-conceitual)
-- [Requisitos](#requisitos)
-- [Documentação da API](#documentação-da-api)
-    - [Acessando localmente](#acessando-localmente)
-    - [Acessando via servidor](#acessando-via-servidor)
-- [Documentação da API](#documentação-da-api)
-- [Funcionalidades](#funcionalidades)
-- [Tecnologias Utilizadas](#tecnologias-utilizadas)
-- [Rodando localmente](#rodando-localmente)
-- [Rodando via Servidor](#rodando-via-servidor)
-- [Rodando os testes](#rodando-os-testes)
-- [Autores](#autores)
+# DSCatalog 📚
 
-<a id="sobre-o-projeto"></a>
-## Sobre o projeto
-Este projeto foi desenvolvido ao longo do curso **Java Spring Expert** da [DevSuperior](https://devsuperior.com.br), 
-ministrado pelo Professor [Nelio Alves](https://github.com/acenelio). O objetivo deste projeto foi desenvolver uma API de catálogos de produtos,
-aplicando os conceitos de construção de API já aprendidos no curso **Java Spring Professional**, também ministrado pelo professor Nélio na mesma plataforma, 
-além de novos conceitos, como Testes Unitários e de Integração.
+API REST para gerenciamento de um catálogo de produtos, desenvolvida com foco em **boas práticas**, **testes automatizados** e organização de código no ecossistema Spring.
 
-<a id="modelo-conceitual"></a>
-## Modelo Conceitual
-![App Class Diagram](https://github.com/hakkinenT/assets/blob/master/java-spring-projects/modelo-conceitual-dscatalog.png)
+## 🚀 Funcionalidades
+- Cadastro, edição e exclusão de produtos
+- Listagem paginada
+- Associação de produtos a categorias
+- Validações de dados
+- Tratamento global de exceções
 
-<a id="requisitos"></a>
-## Requisitos
-- [Java JDK (versão 17 ou superior)](https://www.oracle.com/java/technologies/javase/jdk17-archive-downloads.html)
-- [Git](https://git-scm.com/downloads) - Sistema de controle de versão de código aberto
-- [Uma conta no Github](https://github.com/) - Plataforma de controle de versões
-- [Postman](https://www.postman.com/downloads/) ou [Insomnia](https://insomnia.rest/download) - Ferramentas para testar a API
-- [Docker (Opcional)](https://www.docker.com/products/docker-desktop/) - Para rodar a aplicação localmente
-- [PostgreSQL (Opcional)](https://www.postgresql.org/download/) - Para rodar a aplicação localmente, caso não queira instalar o Docker
-
-<a id="documentação-da-api"></a>
-## Documentação da API
-
-<a id="acessando-localmente"></a>
-### Acessando localmente
-
-1. [Rode a aplicação localmente](#rodando-localmente)
-2. Gere um token de acesso
-- Abra um ferramenta para testar a API (Postman, Insomnia...)
-- Acesse a url abaixo:
-```bash
-http://localhost:8080/oauth2/token
-```
-- Na aba Authorization, acrescente as seguintes informações:
-    - Em Auth Type selecione Basic Auth
-    - Preencha os campos Username e Password com os seguintes valores:
-
-        | Campo   | Valor       | Descrição                           |
-        | :---------- | :--------- | :---------------------------------- |
-        | Username | {{client-id}} | Valor do client-id definido no application.properties |
-        | Password | {{client-secret}} | Valor do client-secret definido no application.properties |
-
-- Envie a requisição e obtenha o token
-- Acesse o endereço:
-```bash
-  http://localhost:8080/swagger-ui.html
-```
-- Adicone o token em Authorize
-- Acesse as rotas
-
-<a id="acessando-via-servidor"></a>
-### Acessando via servidor
-
-1. Gere um token de acesso
-- Abra um ferramenta para testar a API (Postman, Insomnia...)
-- Acesse a url abaixo:
-```bash
-https://dscatalog-mal4.onrender.com/oauth2/token
-```
-- Na aba Authorization, acrescente as seguintes informações:
-    - Em Auth Type selecione Basic Auth
-    - Preencha os campos Username e Password com os seguintes valores:
-
-        | Campo   | Valor       | Descrição                           |
-        | :---------- | :--------- | :---------------------------------- |
-        | Username | {{client-id}} | Valor do client-id definido no application.properties |
-        | Password | {{client-secret}} | Valor do client-secret definido no application.properties |
-
-- Envie a requisição e obtenha o token
-- Acesse o endereço:
-```bash
-  https://dscatalog-mal4.onrender.com/swagger-ui.html
-```
-- Adicone o token em Authorize
-- Acesse as rotas
-
-<a id="funcionalidades"></a>
-## Funcionalidades
-
-- Gerenciar Produtos
-- Gerenciar Categorias
-
-<a id="tecnologias-utilizadas"></a>
-## Tecnologias Utilizadas
-
+## 🛠️ Tecnologias Utilizadas
 - Java
-- Spring boot
-- JPA / Hibernate
-- Banco de Dados H2
+- Spring Boot
+- Spring Web
+- Spring Data JPA
+- PostgreSQL
+- JUnit
+- Maven
 
-<a id="rodando-localmente"></a>
-## Rodando localmente
+## 🏗️ Arquitetura
+- Controller
+- Service
+- Repository
+- DTOs
+- Entities
 
-Clone o projeto
+## ▶️ Como executar o projeto
+
+### Pré-requisitos
+- Java 17+
+- Maven
+- PostgreSQL (ou Docker)
+
+### Passos
+1. Clone o repositório:
+```bash
+git clone https://github.com/hakkinenT/java_spring_boot_dscatalog.git
+```
+2. Acesse o diretório do projeto:
 
 ```bash
-  git clone https://github.com/hakkinenT/java_spring_boot_dscatalog
+cd java_spring_boot_dscatalog
 ```
 
-Entre no diretório do projeto
-
+3. Execute a aplicação:
 ```bash
-  cd java_spring_boot_dscatalog
+mvn spring-boot:run
 ```
 
-Rode a aplicação
+4. A aplicação estará disponível em:
+```arduino
+http://localhost:8080
+```
 
+## 🔐 Autenticação e Autorização
+
+A API utiliza JWT (JSON Web Token) para autenticação.
+
+Após realizar o login, o token retornado deve ser enviado no header das requisições protegidas:
+
+```http
+Authorization: Bearer <token>
+```
+
+## 📌 Endpoints
+
+| Método | Rota                    | Descrição                          |
+|------|--------------------------|------------------------------------|
+| GET  | /products                | Lista produtos (paginado)          |
+| GET  | /products/{id}           | Busca produto por ID               |
+| POST | /products                | Cria novo produto                  |
+| PUT  | /products/{id}           | Atualiza produto                   |
+| DELETE | /products/{id}         | Remove produto                     |
+| GET  | /categories              | Lista categorias                   |
+
+## 📦 Testando a API com Postman
+
+O projeto disponibiliza arquivos do Postman para facilitar o teste da API:
+
+- 📁 Collection: contém todas as requisições da API
+
+- 🌍 Environment: contém variáveis de ambiente, como URL base e token
+
+Como utilizar:
+
+1. Abra o Postman
+
+2. Importe a collection (.json)
+
+3. Importe o environment (.json)
+
+4. Selecione o environment no Postman
+
+5. Execute a requisição de login para obter o token
+
+6. As requisições protegidas utilizarão automaticamente o token salvo no environment
+
+## 🧪 Testes
+
+Este projeto possui testes unitários e de integração utilizando JUnit e Mockito, com foco na validação das regras de negócio.
+
+### Executar todos os testes:
 ```bash
-  ./mvnw spring-boot:run
+mvn test
 ```
 
-<a id="rodando-via-servidor"></a>
-## Rodando via Servidor
-- [Acesse a documentação e teste a API](#documentação-da-api):
+Os testes incluem:
 
-```bash
-https://dscatalog-mal4.onrender.com/swagger-ui.html
-```
-OU
-- Use uma ferramenta para testar a API (Postman, Insomnia...) para testar a API
+- Testes unitários
 
-<a id="rodando-os-testes"></a>
-## Rodando os testes
+- Uso de mocks para simulação de dependências
 
-Para rodar os testes, rode o seguinte comando
+- Validação de serviços e regras de negócio
 
-```bash
-  mvn test
-```
 
-<a id="autores"></a>
+## 📌 Objetivo do Projeto
+
+Projeto criado para consolidar conhecimentos em Spring Boot, testes automatizados e desenvolvimento de APIs REST seguindo boas práticas.
 ## Autores
 
 - [@hakkinenT](https://github.com/hakkinenT)
